@@ -76,17 +76,15 @@ public class CubeMovement : MonoBehaviour {
             prime1.GetComponent<MeshRenderer>().material = mat;
             prime2.GetComponent<MeshRenderer>().material = mat;
             prime3.GetComponent<MeshRenderer>().material = mat;
-
-            //var name = collision.gameObject.name;
-
-            //Debug.Log("Name is " + name);
-            //GameObject.Destroy(collision.gameObject);
-
         }
     }
 
-    //public void OnCollisionExit(Collision collision)
-    //{
-        
-    //}
+    //当与钻石接触的时候会吃钻石
+    void OnTriggerEnter(Collider other)
+    {
+        print("接触");
+        Debug.Log("Name is " + other.gameObject.name);
+        if(other.gameObject.tag=="Diamond")
+            other.gameObject.SetActive(false);//当接触时隐藏钻石
+    }
 }
