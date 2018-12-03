@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class CameraComponent : MonoBehaviour {
     public GameObject Cube;
-    public Vector3 offsite;
+    public Vector3 offset;
 	// Use this for initialization
 	void Start () {
-        offsite = transform.position - Cube.transform.position;
+        offset = transform.position - Cube.transform.position;
 	}
 	
 	// Update is called once per frame
 	void LateUpdate () {
-        transform.position = Cube.transform.position + offsite;
+        transform.position = Cube.transform.position + offset;
 	}
 }
