@@ -16,7 +16,8 @@ public class CubeMovement : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         //Actor = GameObject.Find("Cube");
-	}
+        Actor.transform.eulerAngles = new Vector3(0, 0, 0);//设置开始时候的角度（解决之前开始第一次转动幅度非90度的问题）
+    }
 	
 	// Update is called once per frame
 	void Update () {
