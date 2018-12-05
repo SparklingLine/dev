@@ -8,6 +8,7 @@ public class CubeMovement : MonoBehaviour {
     public float speed = 1;
     private Vector3 pos;
     public Material mat;
+    public AudioSource StartAudio;//Add an AudioSorce to add music
     private int loopCount = 1;
     public bool onGround = true;
     public float disFromGround = 0.6f;
@@ -15,6 +16,7 @@ public class CubeMovement : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        StartAudio.Play();//游戏开始时播放音乐
         //Actor = GameObject.Find("Cube");
         Actor.transform.eulerAngles = new Vector3(0, 0, 0);//设置开始时候的角度（解决之前开始第一次转动幅度非90度的问题）
     }
@@ -62,6 +64,7 @@ public class CubeMovement : MonoBehaviour {
     {
         if(collision.gameObject.tag == "Obstacle")
         {
+            StartAudio.Stop();//当发生碰撞时结束音乐
             isAlive = false;
             GameObject prime1 = GameObject.CreatePrimitive(PrimitiveType.Cube);
             GameObject prime2 = GameObject.CreatePrimitive(PrimitiveType.Cube);
