@@ -26,7 +26,7 @@ public class CubeMovement : MonoBehaviour {
 	void Update () {
         if (beginOrNot == false)
         {
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0)||Input.GetKeyDown(KeyCode.Space))
             {
                 GameObject Actor2 = GameObject.CreatePrimitive(PrimitiveType.Cube);
                 StartAudio.Play();//游戏开始时播放音乐
@@ -45,7 +45,7 @@ public class CubeMovement : MonoBehaviour {
                 Actor2.GetComponent<MeshRenderer>().material = mat;
                 Actor2.GetComponent<BoxCollider>().isTrigger = true;
 
-                if (Input.GetMouseButtonDown(0))  //实现鼠标点击转向
+                if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))  //实现鼠标或键盘空格键点击转向
                 {
                     if (loopCount % 2 != 0)
                     {
