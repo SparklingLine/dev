@@ -13,6 +13,7 @@ public class CubeMovement : MonoBehaviour {
     public bool onGround = true;
     public float disFromGround = 0.6f;
     public bool isAlive = true;
+    private bool beginOrNot;
 
 	// Use this for initialization
 	void Start () {
@@ -23,7 +24,16 @@ public class CubeMovement : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (isAlive)
+        if (beginOrNot == false)
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                GameObject Actor2 = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                StartAudio.Play();//游戏开始时播放音乐
+                beginOrNot = true;
+            }
+        }
+        else if (isAlive)
         {
             onGround = IsGrounded();
             pos = Actor.transform.position; //实现路径记录
