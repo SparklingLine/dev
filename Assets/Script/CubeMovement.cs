@@ -1,25 +1,29 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CubeMovement : MonoBehaviour {
 
     public GameObject Actor;
-    public float speed = 1;
+    public float speed = 4;
     private Vector3 pos;
     public Material mat;
     public AudioSource StartAudio;//Add an AudioSorce to add music
-    private int loopCount = 1;
+    private int loopCount = 0;
     public bool onGround = true;
     public float disFromGround = 0.6f;
     public bool isAlive = true;
     private bool beginOrNot;
+
+   
 
 	// Use this for initialization
 	void Start () {
         StartAudio.Play();//游戏开始时播放音乐
         //Actor = GameObject.Find("Cube");
         Actor.transform.eulerAngles = new Vector3(0, 0, 0);//设置开始时候的角度（解决之前开始第一次转动幅度非90度的问题）
+        
     }
 	
 	// Update is called once per frame
@@ -33,7 +37,7 @@ public class CubeMovement : MonoBehaviour {
                 beginOrNot = true;
             }
         }
-        else if (isAlive)
+        if (isAlive && beginOrNot)
         {
             onGround = IsGrounded();
             pos = Actor.transform.position; //实现路径记录
@@ -90,6 +94,7 @@ public class CubeMovement : MonoBehaviour {
             prime1.GetComponent<MeshRenderer>().material = mat;
             prime2.GetComponent<MeshRenderer>().material = mat;
             prime3.GetComponent<MeshRenderer>().material = mat;
+            
         }
     }
 
@@ -101,4 +106,5 @@ public class CubeMovement : MonoBehaviour {
         if(other.gameObject.tag=="Diamond")
             other.gameObject.SetActive(false);//当接触时隐藏钻石
     }
+    
 }
