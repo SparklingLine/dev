@@ -66,7 +66,7 @@ public class PianoMovement : MonoBehaviour {
 
     }
 
-    //判断是否在陆地上，不再陆地上无跟踪
+    //判断是否在陆地上，不在陆地上无跟踪
     public bool IsGrounded()
     {
         return Physics.Raycast(Actor.transform.position, Vector3.down, disFromGround);
