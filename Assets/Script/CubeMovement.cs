@@ -37,6 +37,13 @@ public class CubeMovement : MonoBehaviour {
                 beginOrNot = true;
             }
         }
+        //当player下落到非指定路径后游戏结束
+        if (Actor.transform.position.y < -26)  //-26 是水面的高度
+        {
+            StartAudio.Stop();//当发生碰撞时结束音乐
+            isAlive = false;
+            Time.timeScale = 0;
+        }
         if (isAlive && beginOrNot)
         {
             onGround = IsGrounded();
