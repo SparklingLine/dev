@@ -1,0 +1,12 @@
+fileFormatVersion: 2
+guid: 7f9288f39e4d65447a841882eb3a190c
+timeCreated: 1528461089
+licenseType: Pro
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures:
+  - _CrownFillTexture: {fileID: 2800000, guid: 3bf6142858a22484cb94550d38c72272, type: 3}
+  - _CrownOutTexture: {fileID: 2800000, guid: 5e418d1771a27da489d50c9a43272d04, type: 3}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

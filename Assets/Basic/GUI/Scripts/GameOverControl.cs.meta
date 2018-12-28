@@ -1,0 +1,24 @@
+fileFormatVersion: 2
+guid: 14ed066c6eec6e642a1018ad39e68895
+timeCreated: 1524977600
+licenseType: Pro
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - LevelInfo: {instanceID: 0}
+  - LevelNameZh_CNLabel: {instanceID: 0}
+  - LevelNameEnLabel: {instanceID: 0}
+  - DiamondLabel: {instanceID: 0}
+  - CrownInSprite: {fileID: 2800000, guid: 3bf6142858a22484cb94550d38c72272, type: 3}
+  - CrownIcon1: {instanceID: 0}
+  - CrownIcon2: {instanceID: 0}
+  - CrownIcon3: {instanceID: 0}
+  - ProgressImage: {instanceID: 0}
+  - ProgressTextBar: {instanceID: 0}
+  - ProgressText: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
