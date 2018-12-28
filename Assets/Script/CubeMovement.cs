@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class CubeMovement : MonoBehaviour {
 
@@ -15,7 +16,8 @@ public class CubeMovement : MonoBehaviour {
     public float disFromGround = 0.6f;
     public bool isAlive = true;
     private bool beginOrNot;
-
+    private int diamond_num=0;
+    public Text countText;
    
 
 	// Use this for initialization
@@ -23,11 +25,12 @@ public class CubeMovement : MonoBehaviour {
         StartAudio.Play();//游戏开始时播放音乐
         //Actor = GameObject.Find("Cube");
         Actor.transform.eulerAngles = new Vector3(0, 0, 0);//设置开始时候的角度（解决之前开始第一次转动幅度非90度的问题）
-        
+        countText.text = "Diamond Number: " + diamond_num;
     }
 	
 	// Update is called once per frame
 	void Update () {
+        countText.text = "Diamond Number: " + diamond_num;
         if (beginOrNot == false)
         {
             if (Input.GetMouseButtonDown(0)||Input.GetKeyDown(KeyCode.Space))
@@ -110,8 +113,11 @@ public class CubeMovement : MonoBehaviour {
     {
         print("接触");
         Debug.Log("Name is " + other.gameObject.name);
-        if(other.gameObject.tag=="Diamond")
+        if (other.gameObject.tag == "Diamond")
+        {
+            diamond_num++;
             other.gameObject.SetActive(false);//当接触时隐藏钻石
+        }
     }
     
 }
