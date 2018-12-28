@@ -15,7 +15,7 @@ public class PianoMovement : MonoBehaviour {
     public bool isAlive = true;
     private bool beginOrNot;
     public bool canuse = true; //游戏成功后进入最终的场景时不再响应用户的操作
-    public GameObject Camera;
+    //public CameraComponent Camera;
 
     // Use this for initialization
     void Start()
