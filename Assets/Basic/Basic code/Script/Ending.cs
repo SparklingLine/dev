@@ -5,7 +5,7 @@ using DG.Tweening;
 
 public class Ending : MonoBehaviour {
 
-	public MainLine MainLine;
+	public PianoMovement MainLine;
     public float Rate = 1;
 	public float OpenNeedTime = 1;
 	public float WinWaitTime = 1;
@@ -28,13 +28,14 @@ public class Ending : MonoBehaviour {
 		MainLine.canuse = false;
 		Ending_Left.DOLocalMoveZ (-0.1f * Rate, OpenNeedTime, false);
 		Ending_Right.DOLocalMoveZ (0.1f * Rate, OpenNeedTime, false);
-		if (MainLine.Camera.GetComponent<MainCarmera> () != null) {
-			MainLine.Camera.GetComponent<MainCarmera> ().enabled = false;
-		}
-		Invoke ("win", WinWaitTime);
+        if (MainLine.Camera.GetComponent<MainCarmera>() != null)
+        {
+            MainLine.Camera.GetComponent<MainCarmera>().enabled = false;
+        }
+        //Invoke ("win", WinWaitTime);  自己定义的player还没有GameOver函数，无法调用
     }
 
 	public void win(){
-		MainLine.GameOver (true, true);
+		//MainLine.GameOver (true, true);
 	}
 }

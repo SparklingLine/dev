@@ -14,6 +14,8 @@ public class PianoMovement : MonoBehaviour {
     public float disFromGround = 0.6f;
     public bool isAlive = true;
     private bool beginOrNot;
+    public bool canuse = true; //游戏成功后进入最终的场景时不再响应用户的操作
+    public GameObject Camera;
 
     // Use this for initialization
     void Start()
@@ -21,7 +23,7 @@ public class PianoMovement : MonoBehaviour {
         StartAudio.Play();//游戏开始时播放音乐
         //Actor = GameObject.Find("Cube");
         Actor.transform.eulerAngles = new Vector3(0, 0, 0);//设置开始时候的角度（解决之前开始第一次转动幅度非90度的问题）
-
+        //canuse = true;
     }
 
     // Update is called once per frame
@@ -48,17 +50,20 @@ public class PianoMovement : MonoBehaviour {
                 Actor2.GetComponent<MeshRenderer>().material = mat;
                 Actor2.GetComponent<BoxCollider>().isTrigger = true;
 
-                if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))  //实现鼠标或键盘空格键点击转向
+                if (canuse == true)
                 {
-                    if (loopCount % 2 != 0)
+                    if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))  //实现鼠标或键盘空格键点击转向
                     {
-                        Actor.transform.eulerAngles = new Vector3(0, -90, 0);
-                        loopCount++;
-                    }
-                    else
-                    {
-                        Actor.transform.eulerAngles = new Vector3(0, 0, 0);
-                        loopCount++;
+                        if (loopCount % 2 != 0)
+                        {
+                            Actor.transform.eulerAngles = new Vector3(0, -90, 0);
+                            loopCount++;
+                        }
+                        else
+                        {
+                            Actor.transform.eulerAngles = new Vector3(0, 0, 0);
+                            loopCount++;
+                        }
                     }
                 }
             }

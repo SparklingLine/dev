@@ -56,19 +56,21 @@ public class CubeMovement : MonoBehaviour {
                 Actor2.GetComponent<MeshRenderer>().material = mat;
                 Actor2.GetComponent<BoxCollider>().isTrigger = true;
 
-                if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))  //实现鼠标或键盘空格键点击转向
-                {
-                    if (loopCount % 2 != 0)
+                               
+                    if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))  //实现鼠标或键盘空格键点击转向
                     {
-                        Actor.transform.eulerAngles = new Vector3(0, 90, 0);
-                        loopCount++;
+                        if (loopCount % 2 != 0)
+                        {
+                            Actor.transform.eulerAngles = new Vector3(0, 90, 0);
+                            loopCount++;
+                        }
+                        else
+                        {
+                            Actor.transform.eulerAngles = new Vector3(0, 0, 0);
+                            loopCount++;
+                        }
                     }
-                    else
-                    {
-                        Actor.transform.eulerAngles = new Vector3(0, 0, 0);
-                        loopCount++;
-                    }
-                }
+                
             }
         }
 
