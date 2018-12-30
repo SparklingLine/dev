@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class PianoPlay : MonoBehaviour {
 
-    public Animator anim;
-    
-
+    public Animator anim;    
 
     private void OnTriggerEnter(Collider other)
     {

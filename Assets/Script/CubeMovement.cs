@@ -16,9 +16,9 @@ public class CubeMovement : MonoBehaviour {
     public float disFromGround = 0.6f;
     public bool isAlive = true;
     private bool beginOrNot;
-    private int diamond_num=0;
+    public int diamondCount=0;
     public Text countText;
-
+    public int deadHeight;
 
     private int now;
     public bool canuse = true; //游戏成功后进入最终的场景时不再响应用户的操作
@@ -26,8 +26,13 @@ public class CubeMovement : MonoBehaviour {
     public Color originColor;
 
     private float timeLeft = 1.0f;
-    public bool colorChange;
-    public Color targetColor;
+    [HideInInspector]public bool colorChange;
+    [HideInInspector]public Color targetColor;
+
+
+    //public GameObject dieEffect;
+    //public AudioClip dieSound;
+    //public bool stop;
 
     // Use this for initialization
     void Start () {
@@ -35,7 +40,7 @@ public class CubeMovement : MonoBehaviour {
         //Actor = GameObject.Find("Cube");
         Actor.transform.eulerAngles = new Vector3(0, 0, 0);//设置开始时候的角度（解决之前开始第一次转动幅度非90度的问题）
         
-        countText.text = "Diamond Number: " + diamond_num;
+        countText.text = "Diamond Number: " + diamondCount;
         //countText.alignment = TextAnchor.UpperLeft;  企图把Text放在左上角，但是实验不成功
         if (Actor.gameObject.tag == "Player1")
         {
@@ -50,7 +55,7 @@ public class CubeMovement : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        countText.text = "Diamond Number: " + diamond_num;
+        countText.text = "Diamond Number: " + diamondCount;
         if (beginOrNot == false)
         {
             if (Input.GetMouseButtonDown(0)||Input.GetKeyDown(KeyCode.Space))
@@ -61,7 +66,7 @@ public class CubeMovement : MonoBehaviour {
             }
         }
         //当player下落到非指定路径后游戏结束
-        if (Actor.transform.position.y < -30)  //低于沙漠的高度（游戏设计竭泽而渔，海水下面为沙漠，有一层沙漠景象，所以改为比沙漠高度还低）
+        if (Actor.transform.position.y < deadHeight)  //低于沙漠的高度（游戏设计竭泽而渔，海水下面为沙漠，有一层沙漠景象，所以改为比沙漠高度还低）
         {
             StartAudio.Stop();//当发生碰撞时结束音乐
             isAlive = false;
@@ -81,10 +86,8 @@ public class CubeMovement : MonoBehaviour {
 
                 if (canuse == true)  //当到到终点后，cube不会再随着用户的操作转向
                 {
-
                     if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))  //实现鼠标或键盘空格键点击转向
-                    {
-                        
+                    {                        
                         if (loopCount % 2 != 0)
                         {
                             if (now == 1)
@@ -100,8 +103,7 @@ public class CubeMovement : MonoBehaviour {
                         {
                             Actor.transform.eulerAngles = new Vector3(0, 0, 0);
                             loopCount++;
-                        }                      
-                     
+                        }                                           
                     }
                 }
             }
@@ -122,8 +124,12 @@ public class CubeMovement : MonoBehaviour {
     //判断是否撞到其他障碍物
     public void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag == "Obstacle")
+        Debug.Log("Enter function");
+       // Debug.Log(speed);
+        Debug.Log(onGround);
+        if (collision.collider.tag == "Obstacle")
         {
+            Debug.Log("Obstacle");
             StartAudio.Stop();//当发生碰撞时结束音乐
             isAlive = false;
             GameObject prime1 = GameObject.CreatePrimitive(PrimitiveType.Cube);
@@ -140,22 +146,45 @@ public class CubeMovement : MonoBehaviour {
             prime1.GetComponent<MeshRenderer>().material = mat;
             prime2.GetComponent<MeshRenderer>().material = mat;
             prime3.GetComponent<MeshRenderer>().material = mat;
+            //GameOver();
             
+        }
+        else if (collision.gameObject.tag == "diamond")
+        {
+            Debug.Log("Collision on diamond");
         }
     }
 
-    //当与钻石接触的时候会吃钻石
+    void OnCollisionExit(Collision collision)
+    {
+        onGround = IsGrounded();
+    }
+
+    //public void GameOver()
+    //{
+    //    //dieEffect.GetComponent<MeshRenderer>().material = this.GetComponent<MeshRenderer>().material;
+    //    Destroy(Instantiate(dieEffect, this.transform.position, this.transform.rotation), 10f);
+    //    StartAudio.Stop();
+    //    isAlive = false;
+    //    AudioSource.PlayClipAtPoint(dieSound, this.transform.position);
+    //    this.GetComponent<Rigidbody>().isKinematic = true;
+    //    stop = true;
+    //}
+
+
+
+    当与钻石接触的时候会吃钻石
     void OnTriggerEnter(Collider other)
     {
         print("接触");
         Debug.Log("Name is " + other.gameObject.name);
         if (other.gameObject.tag == "Diamond")
         {
-            diamond_num++;
+            diamondCount++;
             other.gameObject.SetActive(false);//当接触时隐藏钻石
         }
     }
-    
+
 
     public void ColorChange()
     {
