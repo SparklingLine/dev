@@ -23,6 +23,12 @@ public class CubeMovement : MonoBehaviour {
     private int now;
     public bool canuse = true; //游戏成功后进入最终的场景时不再响应用户的操作
 
+    public Color originColor;
+
+    private float timeLeft = 1.0f;
+    public bool colorChange;
+    public Color targetColor;
+
     // Use this for initialization
     void Start () {
         StartAudio.Play();//游戏开始时播放音乐
@@ -37,7 +43,8 @@ public class CubeMovement : MonoBehaviour {
         }
         else now = 1;
 
-        Debug.Log("now:" + now);
+        this.GetComponent<MeshRenderer>().material.color = originColor;
+        mat.color = originColor;
 
     }
 	
@@ -99,6 +106,10 @@ public class CubeMovement : MonoBehaviour {
                 }
             }
         }
+        if (colorChange)
+        {
+            ColorChange();
+        }
 
 	}
 
@@ -145,4 +156,30 @@ public class CubeMovement : MonoBehaviour {
         }
     }
     
+
+    public void ColorChange()
+    {
+        if (timeLeft <= Time.deltaTime)
+        {
+            // transition complete
+            // assign the target color
+            this.GetComponent<MeshRenderer>().material.color = targetColor;
+            mat.color = targetColor;
+
+            // start a new transition
+            //targetColor = new Color(Random.value, Random.value, Random.value);
+            timeLeft = 1.0f;
+            colorChange = false;
+        }
+        else
+        {
+            // transition in progress
+            // calculate interpolated color
+            this.GetComponent<MeshRenderer>().material.color = Color.Lerp(this.GetComponent<MeshRenderer>().material.color, targetColor, Time.deltaTime / timeLeft);
+            mat.color = Color.Lerp(mat.color, targetColor, Time.deltaTime / timeLeft);
+            // update the timer
+            timeLeft -= Time.deltaTime;
+        }
+    }
+
 }
