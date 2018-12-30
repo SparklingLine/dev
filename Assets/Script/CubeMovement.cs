@@ -28,8 +28,9 @@ public class CubeMovement : MonoBehaviour {
         StartAudio.Play();//游戏开始时播放音乐
         //Actor = GameObject.Find("Cube");
         Actor.transform.eulerAngles = new Vector3(0, 0, 0);//设置开始时候的角度（解决之前开始第一次转动幅度非90度的问题）
+        
         countText.text = "Diamond Number: " + diamond_num;
-
+        //countText.alignment = TextAnchor.UpperLeft;  企图把Text放在左上角，但是实验不成功
         if (Actor.gameObject.tag == "Player1")
         {
             now = 2;

@@ -2,16 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AriseControll : MonoBehaviour {
+public class FromSkyController : MonoBehaviour {
 
     public Animator anim;
-
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player1")
         {
-            anim.SetBool("Arise", true);
+            anim.SetBool("Fall", true);
         }
     }
 
@@ -25,3 +24,4 @@ public class AriseControll : MonoBehaviour {
 		
 	}
 }
+

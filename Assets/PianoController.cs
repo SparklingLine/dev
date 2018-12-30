@@ -13,7 +13,7 @@ public class PianoController : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player1")
         {
             anim1.SetBool("Arise", true);
             anim2.SetBool("Arise", true);
