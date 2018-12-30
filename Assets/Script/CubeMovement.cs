@@ -54,7 +54,7 @@ public class CubeMovement : MonoBehaviour {
             }
         }
         //当player下落到非指定路径后游戏结束
-        if (Actor.transform.position.y < -200)  //低于沙漠的高度（游戏设计竭泽而渔，海水下面为沙漠，有一层沙漠景象，所以改为比沙漠高度还低）
+        if (Actor.transform.position.y < -30)  //低于沙漠的高度（游戏设计竭泽而渔，海水下面为沙漠，有一层沙漠景象，所以改为比沙漠高度还低）
         {
             StartAudio.Stop();//当发生碰撞时结束音乐
             isAlive = false;
