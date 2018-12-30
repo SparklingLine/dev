@@ -9,7 +9,7 @@ public class animatedObjects : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player1")
         {
             anim.SetBool("down", true);
         }
