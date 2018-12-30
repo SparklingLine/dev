@@ -18,14 +18,26 @@ public class CubeMovement : MonoBehaviour {
     private bool beginOrNot;
     private int diamond_num=0;
     public Text countText;
-   
 
-	// Use this for initialization
-	void Start () {
+
+    private int now;
+    public bool canuse = true; //游戏成功后进入最终的场景时不再响应用户的操作
+
+    // Use this for initialization
+    void Start () {
         StartAudio.Play();//游戏开始时播放音乐
         //Actor = GameObject.Find("Cube");
         Actor.transform.eulerAngles = new Vector3(0, 0, 0);//设置开始时候的角度（解决之前开始第一次转动幅度非90度的问题）
         countText.text = "Diamond Number: " + diamond_num;
+
+        if (Actor.gameObject.tag == "Player1")
+        {
+            now = 2;
+        }
+        else now = 1;
+
+        Debug.Log("now:" + now);
+
     }
 	
 	// Update is called once per frame
@@ -59,21 +71,31 @@ public class CubeMovement : MonoBehaviour {
                 Actor2.GetComponent<MeshRenderer>().material = mat;
                 Actor2.GetComponent<BoxCollider>().isTrigger = true;
 
-                               
+                if (canuse == true)  //当到到终点后，cube不会再随着用户的操作转向
+                {
+
                     if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))  //实现鼠标或键盘空格键点击转向
                     {
+                        
                         if (loopCount % 2 != 0)
                         {
-                            Actor.transform.eulerAngles = new Vector3(0, 90, 0);
+                            if (now == 1)
+                            {
+                                Actor.transform.eulerAngles = new Vector3(0, 90, 0);
+                                //Actor.transform.rotation = new Vector3(0, 90, 0);
+                            }
+                            else
+                                Actor.transform.eulerAngles = new Vector3(0, -90, 0);
                             loopCount++;
                         }
                         else
                         {
                             Actor.transform.eulerAngles = new Vector3(0, 0, 0);
                             loopCount++;
-                        }
+                        }                      
+                     
                     }
-                
+                }
             }
         }
 

@@ -5,14 +5,14 @@ using DG.Tweening;
 
 public class Ending : MonoBehaviour {
 
-	public PianoMovement MainLine;
+	public CubeMovement MainLine;
     public float Rate = 1;
 	public float OpenNeedTime = 1;
 	public float WinWaitTime = 1;
 	private Transform Ending_Left;
 	private Transform Ending_Right;
 
-    public CameraComponent MainCamera;
+    public CameraComponent MainCamera;  //主摄像头，当到达终点后，摄像头不在随着player移动
 
 	// Use this for initialization
 	public void Start () {
