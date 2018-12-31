@@ -173,7 +173,7 @@ public class CubeMovement : MonoBehaviour {
 
 
 
-    当与钻石接触的时候会吃钻石
+    //当与钻石接触的时候会吃钻石
     void OnTriggerEnter(Collider other)
     {
         print("接触");
