@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+//岩
 public class LRSelectLevelButton : MonoBehaviour {
 
 	public LevelControl Control;

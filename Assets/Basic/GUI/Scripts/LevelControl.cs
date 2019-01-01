@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
-
+//岩
 public class LevelControl : MonoBehaviour {
 
 	public AudioSource AudioSource;
@@ -40,7 +40,7 @@ public class LevelControl : MonoBehaviour {
 	}
 
 	public void SelectLevel (GameObject SelectLevelButton, float LevelToPos) {
-		AudioSource.Stop ();
+		//AudioSource.Stop ();
 		LevelInfo LevelInfo = SelectLevelButton.GetComponent<LevelInfo> ();
 		NowButton.GetComponent<Image> ().sprite = SelectLevelButtonOutSprite;
 		NowButton = SelectLevelButton;
