@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+
+
 public class CubeMovement : MonoBehaviour {
 
     public GameObject Actor;
@@ -28,6 +30,7 @@ public class CubeMovement : MonoBehaviour {
     private float timeLeft = 1.0f;
     [HideInInspector]public bool colorChange;
     [HideInInspector]public Color targetColor;
+
 
 
     //public GameObject dieEffect;
@@ -146,8 +149,13 @@ public class CubeMovement : MonoBehaviour {
             prime1.GetComponent<MeshRenderer>().material = mat;
             prime2.GetComponent<MeshRenderer>().material = mat;
             prime3.GetComponent<MeshRenderer>().material = mat;
+
             //GameOver();
-            
+            //岩GameOverControl
+           // GameOverControl gameover= new GameOverControl();
+           // gameover.GameOver(false,2, diamondCount, 0);
+            //GameOver(0, 0, diamondCount, 0);
+
         }
         else if (collision.gameObject.tag == "diamond")
         {
