@@ -38,8 +38,24 @@ public class CubeMovement : MonoBehaviour {
     //public bool stop;
 
     // Use this for initialization
+    GameObject activeObj;
+    GameObject myText;//shan**************
+    public Text YanText;
+    public RawImage YanCrown;
+    GameOverControl gameOverControl;
+    void Awake()
+   {
+       activeObj = GameObject.Find("OverTab");//你必须先在Awake()函数找到这个对象，并保留其实例（基本和指针的意思）
+    }
+
+
     void Start () {
+        Awake();
         StartAudio.Play();//游戏开始时播放音乐
+                          //岩y隐藏页面
+      
+
+       activeObj.SetActive(false);
         //Actor = GameObject.Find("Cube");
         Actor.transform.eulerAngles = new Vector3(0, 0, 0);//设置开始时候的角度（解决之前开始第一次转动幅度非90度的问题）
         
@@ -74,6 +90,9 @@ public class CubeMovement : MonoBehaviour {
             StartAudio.Stop();//当发生碰撞时结束音乐
             isAlive = false;
             Time.timeScale = 0;
+            activeObj.SetActive(true);
+            YanText.text = diamondCount.ToString() + "/10";//显示钻石数量
+            activeObj.SetActive(true);
         }
         if (isAlive && beginOrNot)
         {
@@ -121,7 +140,9 @@ public class CubeMovement : MonoBehaviour {
     //判断是否在陆地上，不再陆地上无跟踪
     public bool IsGrounded()
     {
+      
         return Physics.Raycast(Actor.transform.position, Vector3.down, disFromGround);
+        
     }
 
     //判断是否撞到其他障碍物
@@ -152,9 +173,12 @@ public class CubeMovement : MonoBehaviour {
 
             //GameOver();
             //岩GameOverControl
-           // GameOverControl gameover= new GameOverControl();
-           // gameover.GameOver(false,2, diamondCount, 0);
-            //GameOver(0, 0, diamondCount, 0);
+            // GameObject activeObj2 = GameObject.Find("OverTab");
+            //activeObj.SetActive(true);
+            YanText.text = diamondCount.ToString() + "/10";
+           // YanCrown.color = new Color(YanCrown.color.r, YanCrown.color.g, YanCrown.color.b, 255);
+            activeObj.SetActive(true);
+
 
         }
         else if (collision.gameObject.tag == "diamond")
@@ -190,6 +214,12 @@ public class CubeMovement : MonoBehaviour {
         {
             diamondCount++;
             other.gameObject.SetActive(false);//当接触时隐藏钻石
+        }
+        if (other.gameObject.tag == "endTrigger")
+        {
+            YanText.text = diamondCount.ToString() + "/10";//成功
+            YanCrown.color = new Color(YanCrown.color.r, YanCrown.color.g, YanCrown.color.b, 255);//皇冠全亮
+            activeObj.SetActive(true);
         }
     }
 
