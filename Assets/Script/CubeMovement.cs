@@ -189,7 +189,8 @@ public class CubeMovement : MonoBehaviour {
         if (other.gameObject.tag == "Diamond")
         {
             diamondCount++;
-            other.gameObject.SetActive(false);//当接触时隐藏钻石
+            Destroy(other.gameObject);
+            //other.gameObject.SetActive(false);//当接触时隐藏钻石
         }
     }
 
