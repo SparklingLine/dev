@@ -25,23 +25,36 @@ public class LevelControl : MonoBehaviour {
 	public int NowSceneID;
 	public string NowLevelNameZh_CN;
 	public string NowLevelNameEn;
+    public GameObject Piano;
+    public GameObject Rollin;
 
-	public void Start () {
+    public void Start () {
 		SelectLevel (NowButton, 0);
-	}
+        Piano = GameObject.Find("Pinao_L");
+        Rollin = GameObject.Find("Rollin_L");
+     // Piano.SetActive(false);
+    }
 
 	public void Update () {
-		if (Input.GetKeyDown (KeyCode.LeftArrow)) {
+        GameObject.Find("Piano_L");
+        if (Input.GetKeyDown (KeyCode.LeftArrow)) {
 			LeftButton.Click ();
-		}
+            //
+            Piano.SetActive(true);
+
+        }
 		if (Input.GetKeyDown (KeyCode.RightArrow)) {
 			RightButton.Click ();
-		}
+            Piano.SetActive(false);
+        }
 	}
 
 	public void SelectLevel (GameObject SelectLevelButton, float LevelToPos) {
-		//AudioSource.Stop ();
-		LevelInfo LevelInfo = SelectLevelButton.GetComponent<LevelInfo> ();
+        //AudioSource.Stop ();
+        // Piano.SetActive(false);
+       // Piano = GameObject.Find("Pinao_L");
+       // Rollin = GameObject.Find("Rollin_L");
+        LevelInfo LevelInfo = SelectLevelButton.GetComponent<LevelInfo> ();
 		NowButton.GetComponent<Image> ().sprite = SelectLevelButtonOutSprite;
 		NowButton = SelectLevelButton;
 		NowButton.GetComponent<Image> ().sprite = SelectLevelButtonInSprite;
@@ -52,7 +65,11 @@ public class LevelControl : MonoBehaviour {
 		LevelIcon.DOMoveX (LevelToPos, 0.5f, false);
 		NowLevelID = SelectLevelButton.GetComponent<LevelInfo> ().LevelID;
 		NowSceneID = SelectLevelButton.GetComponent<LevelInfo> ().SceneID;
-		AudioSource.clip = LevelInfo.Audio;
+        //
+        if(NowLevelID==1) Piano.SetActive(true);
+        if (NowLevelID == 2) Piano.SetActive(false);
+
+        AudioSource.clip = LevelInfo.Audio;
 		AudioSource.Play ();
 		if (!PlayerPrefs.HasKey (LevelInfo.LevelNameEn + "_Wined")) {
 			PlayerPrefs.SetString (LevelInfo.LevelNameEn + "_Wined", "false");
