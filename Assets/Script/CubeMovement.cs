@@ -53,7 +53,7 @@ public class CubeMovement : MonoBehaviour {
         //Awake();
 
         StartAudio.Play();//游戏开始时播放音乐
-        
+        Time.timeScale = 1;
         //岩y隐藏页面     
        //activeObj.SetActive(false);
         overTab.SetActive(false);
@@ -88,10 +88,9 @@ public class CubeMovement : MonoBehaviour {
         {
             StartAudio.Stop();//当发生碰撞时结束音乐
             isAlive = false;
-            Time.timeScale = 0;
-            activeObj.SetActive(true);
+            Time.timeScale = 0;            
             YanText.text = diamondCount.ToString() + "/10";//显示钻石数量
-            activeObj.SetActive(true);
+            overTab.SetActive(true);
         }
         if (isAlive && beginOrNot)
         {
