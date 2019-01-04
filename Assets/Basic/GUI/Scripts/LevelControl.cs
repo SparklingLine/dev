@@ -41,11 +41,12 @@ public class LevelControl : MonoBehaviour {
 			LeftButton.Click ();
             //
             Piano.SetActive(true);
-
+            Rollin.SetActive(false);
         }
 		if (Input.GetKeyDown (KeyCode.RightArrow)) {
 			RightButton.Click ();
             Piano.SetActive(false);
+            Rollin.SetActive(true);
         }
 	}
 
@@ -66,8 +67,15 @@ public class LevelControl : MonoBehaviour {
 		NowLevelID = SelectLevelButton.GetComponent<LevelInfo> ().LevelID;
 		NowSceneID = SelectLevelButton.GetComponent<LevelInfo> ().SceneID;
         //
-        if(NowLevelID==1) Piano.SetActive(true);
-        if (NowLevelID == 2) Piano.SetActive(false);
+        if (NowLevelID == 1)
+        {
+            Piano.SetActive(true);
+            Rollin.SetActive(false);
+        }
+
+        if (NowLevelID == 2) { Piano.SetActive(false);
+            Rollin.SetActive(true);
+        }
 
         AudioSource.clip = LevelInfo.Audio;
 		AudioSource.Play ();
