@@ -39,7 +39,7 @@ public class CubeMovement : MonoBehaviour {
 
     // Use this for initialization
     GameObject activeObj;
- 
+    public GameObject overTab;
     public Text YanText;
     public RawImage YanCrown;
     GameOverControl gameOverControl;
@@ -50,12 +50,15 @@ public class CubeMovement : MonoBehaviour {
 
 
     void Start () {
-        Awake();
+        //Awake();
+
+
         StartAudio.Play();//游戏开始时播放音乐
                           //岩y隐藏页面
       
 
-       activeObj.SetActive(false);
+       //activeObj.SetActive(false);
+        overTab.SetActive(false);
         //Actor = GameObject.Find("Cube");
         Actor.transform.eulerAngles = new Vector3(0, 0, 0);//设置开始时候的角度（解决之前开始第一次转动幅度非90度的问题）
 
@@ -70,7 +73,7 @@ public class CubeMovement : MonoBehaviour {
 
         this.GetComponent<MeshRenderer>().material.color = originColor;
         mat.color = originColor;
-
+        Debug.Log("开始");
     }
 	
 	// Update is called once per frame
@@ -78,12 +81,13 @@ public class CubeMovement : MonoBehaviour {
         countText.text = diamondCount.ToString();
         //countText.text = "Diamond Number: " + diamondCount;
         if (beginOrNot == false)
-        {
+        {            
             if (Input.GetMouseButtonDown(0)||Input.GetKeyDown(KeyCode.Space))
             {
                 GameObject Actor2 = GameObject.CreatePrimitive(PrimitiveType.Cube);
                 StartAudio.Play();//游戏开始时播放音乐
                 beginOrNot = true;
+                Debug.Log("update");
             }
         }
         //当player下落到非指定路径后游戏结束
@@ -149,10 +153,7 @@ public class CubeMovement : MonoBehaviour {
 
     //判断是否撞到其他障碍物
     public void OnCollisionEnter(Collision collision)
-    {
-        Debug.Log("Enter function");
-       // Debug.Log(speed);
-        Debug.Log(onGround);
+    {            
         if (collision.collider.tag == "Obstacle")
         {
             Debug.Log("Obstacle");
@@ -174,18 +175,17 @@ public class CubeMovement : MonoBehaviour {
             prime3.GetComponent<MeshRenderer>().material = mat;
 
             //GameOver();
-            //岩GameOverControl
-            // GameObject activeObj2 = GameObject.Find("OverTab");
-            //activeObj.SetActive(true);
+            
             YanText.text = diamondCount.ToString() + "/10";
-           // YanCrown.color = new Color(YanCrown.color.r, YanCrown.color.g, YanCrown.color.b, 255);
-            activeObj.SetActive(true);
-
+            // YanCrown.color = new Color(YanCrown.color.r, YanCrown.color.g, YanCrown.color.b, 255);
+            
+            //activeObj.SetActive(true);
+            overTab.SetActive(true);
 
         }
         else if (collision.gameObject.tag == "diamond")
         {
-            Debug.Log("Collision on diamond");
+           
         }
     }
 
@@ -210,8 +210,8 @@ public class CubeMovement : MonoBehaviour {
     //当与钻石接触的时候会吃钻石
     void OnTriggerEnter(Collider other)
     {
-        print("接触");
-        Debug.Log("Name is " + other.gameObject.name);
+        
+        //Debug.Log("Name is " + other.gameObject.name);
         if (other.gameObject.tag == "Diamond")
         {
             diamondCount++;
