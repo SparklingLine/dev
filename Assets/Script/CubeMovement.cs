@@ -31,7 +31,8 @@ public class CubeMovement : MonoBehaviour {
     [HideInInspector]public bool colorChange;
     [HideInInspector]public Color targetColor;
 
-
+    public Vector3 transform1;
+    public Vector3 transform2;
 
     //public GameObject dieEffect;
     //public AudioClip dieSound;
@@ -117,19 +118,13 @@ public class CubeMovement : MonoBehaviour {
                     if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))  //实现鼠标或键盘空格键点击转向
                     {                        
                         if (loopCount % 2 != 0)
-                        {
-                            if (now == 1)
-                            {
-                                Actor.transform.eulerAngles = new Vector3(0, 90, 0);
-                                //Actor.transform.rotation = new Vector3(0, 90, 0);
-                            }
-                            else
-                                Actor.transform.eulerAngles = new Vector3(0, -90, 0);
+                        {                            
+                            Actor.transform.eulerAngles = transform1;                                
                             loopCount++;
                         }
                         else
                         {
-                            Actor.transform.eulerAngles = new Vector3(0, 0, 0);
+                            Actor.transform.eulerAngles = transform2;
                             loopCount++;
                         }                                           
                     }
