@@ -39,7 +39,7 @@ public class CubeMovement : MonoBehaviour {
 
     // Use this for initialization
     GameObject activeObj;
-    GameObject myText;//shan**************
+ 
     public Text YanText;
     public RawImage YanCrown;
     GameOverControl gameOverControl;
@@ -58,8 +58,9 @@ public class CubeMovement : MonoBehaviour {
        activeObj.SetActive(false);
         //Actor = GameObject.Find("Cube");
         Actor.transform.eulerAngles = new Vector3(0, 0, 0);//设置开始时候的角度（解决之前开始第一次转动幅度非90度的问题）
-        
-        countText.text = "Diamond Number: " + diamondCount;
+
+        countText.text = diamondCount.ToString();
+        //countText.text = "Diamond Number: " + diamondCount;
         //countText.alignment = TextAnchor.UpperLeft;  企图把Text放在左上角，但是实验不成功
         if (Actor.gameObject.tag == "Player1")
         {
@@ -74,7 +75,8 @@ public class CubeMovement : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        countText.text = "Diamond Number: " + diamondCount;
+        countText.text = diamondCount.ToString();
+        //countText.text = "Diamond Number: " + diamondCount;
         if (beginOrNot == false)
         {
             if (Input.GetMouseButtonDown(0)||Input.GetKeyDown(KeyCode.Space))
