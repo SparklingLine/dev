@@ -109,16 +109,11 @@ public class CubeMovement : MonoBehaviour {
                 {
                     if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))  //实现鼠标或键盘空格键点击转向
                     {                        
-                        if (loopCount % 2 != 0)
-                        {                            
-                            Actor.transform.eulerAngles = transform1;                                
-                            loopCount++;
-                        }
-                        else
-                        {
-                            Actor.transform.eulerAngles = transform2;
-                            loopCount++;
-                        }                                           
+                        if (loopCount % 2 != 0)                                              
+                            Actor.transform.eulerAngles = transform1;                                                                                   
+                        else                        
+                            Actor.transform.eulerAngles = transform2;                                                    
+                        loopCount++;
                     }
                 }
             }
