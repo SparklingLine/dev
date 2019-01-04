@@ -22,7 +22,6 @@ public class CubeMovement : MonoBehaviour {
     public Text countText;
     public int deadHeight;
 
-    private int now;
     public bool canuse = true; //游戏成功后进入最终的场景时不再响应用户的操作
 
     public Color originColor;
@@ -35,7 +34,7 @@ public class CubeMovement : MonoBehaviour {
     public Vector3 transform2;
 
     //public GameObject dieEffect;
-    //public AudioClip dieSound;
+    public AudioClip dieSound;
     //public bool stop;
 
     // Use this for initialization
@@ -53,11 +52,9 @@ public class CubeMovement : MonoBehaviour {
     void Start () {
         //Awake();
 
-
         StartAudio.Play();//游戏开始时播放音乐
-                          //岩y隐藏页面
-      
-
+        
+        //岩y隐藏页面     
        //activeObj.SetActive(false);
         overTab.SetActive(false);
         //Actor = GameObject.Find("Cube");
@@ -66,12 +63,7 @@ public class CubeMovement : MonoBehaviour {
         countText.text = diamondCount.ToString();
         //countText.text = "Diamond Number: " + diamondCount;
         //countText.alignment = TextAnchor.UpperLeft;  企图把Text放在左上角，但是实验不成功
-        if (Actor.gameObject.tag == "Player1")
-        {
-            now = 2;
-        }
-        else now = 1;
-
+        
         this.GetComponent<MeshRenderer>().material.color = originColor;
         mat.color = originColor;
         Debug.Log("开始");
@@ -153,6 +145,8 @@ public class CubeMovement : MonoBehaviour {
         {
             Debug.Log("Obstacle");
             StartAudio.Stop();//当发生碰撞时结束音乐
+            //dieSound.Play();
+            AudioSource.PlayClipAtPoint(dieSound, collision.collider.transform.position);
             isAlive = false;
             GameObject prime1 = GameObject.CreatePrimitive(PrimitiveType.Cube);
             GameObject prime2 = GameObject.CreatePrimitive(PrimitiveType.Cube);
