@@ -31,7 +31,8 @@ public class CubeMovement : MonoBehaviour {
     [HideInInspector]public bool colorChange;
     [HideInInspector]public Color targetColor;
 
-
+    public Vector3 transform1;
+    public Vector3 transform2;
 
     //public GameObject dieEffect;
     //public AudioClip dieSound;
@@ -61,12 +62,7 @@ public class CubeMovement : MonoBehaviour {
 
         countText.text = diamondCount.ToString();
         //countText.text = "Diamond Number: " + diamondCount;
-        //countText.alignment = TextAnchor.UpperLeft;  企图把Text放在左上角，但是实验不成功
-        if (Actor.gameObject.tag == "Player1")
-        {
-            now = 2;
-        }
-        else now = 1;
+        //countText.alignment = TextAnchor.UpperLeft;  企图把Text放在左上角，但是实验不成功        
 
         this.GetComponent<MeshRenderer>().material.color = originColor;
         mat.color = originColor;
@@ -112,22 +108,12 @@ public class CubeMovement : MonoBehaviour {
                 {
                     if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))  //实现鼠标或键盘空格键点击转向
                     {                        
-                        if (loopCount % 2 != 0)
-                        {
-                            if (now == 1)
-                            {
-                                Actor.transform.eulerAngles = new Vector3(0, 90, 0);
-                                //Actor.transform.rotation = new Vector3(0, 90, 0);
-                            }
-                            else
-                                Actor.transform.eulerAngles = new Vector3(0, -90, 0);
-                            loopCount++;
-                        }
-                        else
-                        {
-                            Actor.transform.eulerAngles = new Vector3(0, 0, 0);
-                            loopCount++;
-                        }                                           
+                        if (loopCount % 2 != 0)                        
+                            Actor.transform.eulerAngles = transform1 ;                                                                                
+                        else                       
+                            Actor.transform.eulerAngles = transform2;                            
+                       
+                        loopCount++;
                     }
                 }
             }
